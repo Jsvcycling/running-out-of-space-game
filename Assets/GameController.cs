@@ -36,6 +36,11 @@ public class GameController : MonoBehaviour {
     }
   }
 
+  public bool IsValidPosition(Vector2 v) {
+    return ((int)v.x >= 0 && (int)v.x < boardWidth &&
+            (int)v.y >= 0 && (int)v.y < boardHeight);
+  }
+
   // Delete all elements in a row.
   void DeleteRow(int row) {
     for (int i = 0; i < boardWidth; i++) {
