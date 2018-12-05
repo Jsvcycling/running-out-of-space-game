@@ -52,8 +52,7 @@ public class Shape : MonoBehaviour {
 
       if (!controller.IsValidPosition(pos)) return false;
 
-      if (controller.grid[(int)pos.x, (int)pos.y] != null &&
-          controller.grid[(int)pos.x, (int)pos.y].parent != transform) {
+      if (controller.grid[(int)pos.x, (int)pos.y] != null) {
         return false;
       }
     }
