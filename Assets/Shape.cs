@@ -78,7 +78,10 @@ public class Shape : MonoBehaviour {
       controller.grid[(int)pos.x, (int)pos.y] = child;
     }
 
-    controller.SpawnNewShape();
     isActive = false;
+
+    controller.CheckBoard();
+
+    controller.SpawnNewShape();
   }
 }

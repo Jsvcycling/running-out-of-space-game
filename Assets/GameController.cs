@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
 public class GameController : MonoBehaviour {
-  public int boardWidth = 10;
-  public int boardHeight = 10;
+  public int boardWidth = 3;
+  public int boardHeight = 3;
 
   public int score = 0;
 
@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
     SpawnNewShape();
   }
 
-  public void FixedUpdate() {
+  public void CheckBoard() {
     for (int i = 0; i < boardHeight; i++) {
       if (IsRowFull(i)) {
         DeleteRow(i);
@@ -32,6 +32,14 @@ public class GameController : MonoBehaviour {
       if (IsColumnFull(i)) {
         DeleteColumn(i);
         score += 1;
+      }
+    }
+
+    GameObject[] shapes = GameObject.FindGameObjectsWithTag("Player");
+
+    foreach (GameObject shape in shapes) {
+      if (shape.transform.childCount < 1) {
+        Destroy(shape);
       }
     }
   }
