@@ -1,36 +1,45 @@
 ﻿using UnityEngine;
 
 public class Shape : MonoBehaviour {
-  GameController controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+  GameController controller;
+
+  bool isActive;
+
+  void Start() {
+    controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    isActive = true;
+  }
 
   void Update() {
-    if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-      transform.position += Vector3.left;
+    if (isActive) {
+      if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+        transform.position += Vector3.left;
 
-      // Make sure the new position is valid.
-      if (!CanMove()) transform.position += Vector3.right;
+        // Make sure the new position is valid.
+        if (!CanMove()) transform.position += Vector3.right;
 
-    } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
-      transform.position += Vector3.right;
+      } else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+        transform.position += Vector3.right;
 
-      // Make sure the new position is valid.
-      if (!CanMove()) transform.position += Vector3.left;
+        // Make sure the new position is valid.
+        if (!CanMove()) transform.position += Vector3.left;
 
-    } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
-      transform.position += Vector3.up;
+      } else if (Input.GetKeyDown(KeyCode.UpArrow)) {
+        transform.position += Vector3.up;
 
-      // Make sure the new position is valid.
-      if (!CanMove()) transform.position += Vector3.down;
+        // Make sure the new position is valid.
+        if (!CanMove()) transform.position += Vector3.down;
 
-    } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
-      transform.position += Vector3.down;
+      } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        transform.position += Vector3.down;
 
-      // make sure the new position is valid.
-      if (!CanMove()) transform.position += Vector3.up;
+        // make sure the new position is valid.
+        if (!CanMove()) transform.position += Vector3.up;
 
-    } else if (Input.GetKeyDown(KeyCode.Space)) {
-      // Place the blocks on the board.
-      if (CanPlace()) UpdateBoard();
+      } else if (Input.GetKeyDown(KeyCode.Space)) {
+        // Place the blocks on the board.
+        if (CanPlace()) UpdateBoard();
+      }
     }
   }
 
@@ -57,6 +66,8 @@ public class Shape : MonoBehaviour {
       }
     }
 
+    
+
     return true;
   }
 
@@ -66,5 +77,8 @@ public class Shape : MonoBehaviour {
       Vector2 pos = GameController.RoundVector2(child.position);
       controller.grid[(int)pos.x, (int)pos.y] = child;
     }
+
+    controller.SpawnNewShape();
+    isActive = false;
   }
 }
