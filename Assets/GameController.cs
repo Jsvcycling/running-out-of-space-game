@@ -6,6 +6,7 @@ public class GameController : MonoBehaviour {
 
   public int score = 0;
 
+  public GameObject background;
   public GameObject[] shapes;
 
   public Transform[,] grid;
@@ -16,6 +17,18 @@ public class GameController : MonoBehaviour {
 
   void Start() {
     grid = new Transform[boardWidth, boardHeight];
+
+    // Create a root object for the board.
+    GameObject boardRoot = new GameObject();
+    boardRoot.name = "Board";
+
+    // Initialize the board background.
+    for (int i = 0; i < boardWidth; i++) {
+      for (int j = 0; j < boardHeight; j++) {
+        GameObject back = Instantiate(background, new Vector3(i, j, 0), Quaternion.identity);
+        back.transform.SetParent(boardRoot.transform);
+      }
+    }
 
     SpawnNewShape();
   }

@@ -220,6 +220,7 @@ MonoBehaviour:
   boardWidth: 3
   boardHeight: 3
   score: 0
+  background: {fileID: 1584533900964022, guid: 4d526c32e8f5cab498faf4ff9fb0b14d, type: 2}
   shapes:
   - {fileID: 1584533900964022, guid: 4d526c32e8f5cab498faf4ff9fb0b14d, type: 2}
 --- !u!4 &2126127090
